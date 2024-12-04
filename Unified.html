@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Istanbul University Attendance System</title>
+    <style>
+  /* Genel Ayarlar */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Siyah arka plan */
+    color: #fff; /* Beyaz yazılar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f57c00; /* Turuncu */
+    flex-wrap: wrap; /* Mobilde üst üste gelsin */
+}
+
+header h1 {
+    font-size: 20px; /* Mobilde biraz küçülsün */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: #000;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: 2px solid #f57c00;
+    transition: 0.3s;
+}
+
+header nav a:hover {
+    background-color: #f57c00;
+    color: #000;
+}
+
+/* Ana Bölüm */
+main {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 90%; /* Genişlik mobilde daha az olsun */
+    margin: 0 auto;
+}
+
+input {
+    padding: 10px;
+    font-size: 14px; /* Mobilde biraz küçülsün */
+    border: 2px solid #f57c00;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    font-size: 14px; /* Mobilde küçülsün */
+    border: none;
+    border-radius: 20px;
+    background-color: #f57c00;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ff9800;
+}
+
+#qrImage {
+    margin-top: 10px;
+    max-width: 100%;
+    border: 2px solid #f57c00;
+    border-radius: 10px;
+}
+
+/* Arka plandaki "MIS" yazısı */
+#background-text {
+    position: absolute;
+    font-size: 120px; /* Mobilde daha küçük */
+    font-weight: bold;
+    color: #ff9800;
+    text-shadow: 0 0 20px #ff9800, 0 0 40px #ff9800, 0 0 60px #ff9800;
+    opacity: 0.2;
+    transition: left 1.75s linear, top 1.75s linear;
+    pointer-events: none; /* Dokunmatiği kapatır */
+}
+
+/* Mobil Uyumluluk için Medya Sorguları */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Üst üste gelsin */
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 18px; /* Başlık küçülsün */
+    }
+
+    form {
+        max-width: 95%; /* Daha dar */
+    }
+
+    #background-text {
+        font-size: 100px; /* Mobilde daha küçük */
+    }
+}
+
+
+    </style>
+
+    
+</head>
+<body>
+
+     <!-- Arka plan için "MIS" yazısı -->
+     <div id="background-text">MIS</div>
+    <!-- Üst başlık ve menü -->
+    <header>
+        <h1>Istanbul University Attendance System</h1>
+        <nav>
+            <a href="#" id="teacher-login">Teacher Login</a>
+        </nav>
+    </header>
+
+    <!-- Öğrenci formu -->
+    <main>
+        <section class="student-form">
+            <h2>Generate QR Code</h2>
+            <form id="qrForm">
+                <input type="text" id="name" placeholder="Name" required> <!-- Ad alanı -->
+                <input type="text" id="surname" placeholder="Surname" required> <!-- Soyad alanı -->
+                <input type="text" id="student_id" placeholder="Student ID" required> <!-- Öğrenci ID alanı -->
+                <button type="submit" id="generate-btn">Create</button> <!-- Oluştur butonu -->
+            </form>
+
+            <!-- QR kod ve öğrenci ismini göstermek için alan -->
+            <div id="qrResult">
+                <p id="student-name"></p> <!-- Öğrenci ismi -->
+                <img id="qrImage" src="" alt="QR Code" style="display: none;"> <!-- QR kod görseli -->
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript dosyasını bağlama -->
+    <script>
+        // Formun submit olayını dinle
+document.getElementById("qrForm").addEventListener("submit", async function (e) {
+    e.preventDefault(); // Sayfanın yeniden yüklenmesini önler
+
+    // Formdan gelen verileri al
+    const name = document.getElementById("name").value;
+    const surname = document.getElementById("surname").value;
+    const student_id = document.getElementById("student_id").value;
+
+    try {
+        // Flask API'ye POST isteği gönder
+        const response = await fetch("http://127.0.0.1:5000/generate_qr", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, surname, student_id })
+        });
+
+        // API'den dönen yanıtı işle
+        if (response.ok) {
+            const data = await response.blob(); // Görsel veri olarak QR kodu al
+            const qrImage = document.getElementById("qrImage");
+            const studentName = document.getElementById("student-name");
+
+            // QR kod ve öğrenci ismini göster
+            qrImage.src = URL.createObjectURL(data);
+            qrImage.style.display = "block";
+            studentName.textContent = `${name} ${surname}`;
+        } else {
+            alert("QR kod oluşturulamadı. Lütfen tekrar deneyin.");
+        }
+    } catch (error) {
+        console.error("Bir hata oluştu:", error);
+        alert("Sunucuya bağlanılamadı.");
+    }
+});
+function moveBackgroundText() {
+    const backgroundText = document.getElementById("background-text");
+
+    // Ekran boyutlarını al
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    // Yazının boyutunu al
+    const textWidth = backgroundText.offsetWidth;
+    const textHeight = backgroundText.offsetHeight;
+
+    // Rastgele pozisyon oluştur (tam ekran sınırlarını kullanarak)
+    const randomX = Math.random() * (screenWidth - textWidth);
+    const randomY = Math.random() * (screenHeight - textHeight);
+
+    // Yeni pozisyona taşı
+    backgroundText.style.left = `${randomX}px`;
+    backgroundText.style.top = `${randomY}px`;
+}
+
+// Yazıyı her 1 saniyede bir hareket ettir
+setInterval(moveBackgroundText, 1000);
+
+
+
+
+
+
+    </script>
+</body>
+</html>
