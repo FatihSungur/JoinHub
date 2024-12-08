@@ -1,145 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Istanbul University Attendance System</title>
+
+    <!-- CSS ile stiller -->
     <style>
-  /* Genel Ayarlar */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #000; /* Siyah arka plan */
-    color: #fff; /* Beyaz yazılar */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        /* Genel Ayarlar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Siyah arka plan */
+            color: #fff; /* Beyaz yazılar */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-/* Header */
-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #f57c00; /* Turuncu */
-    flex-wrap: wrap; /* Mobilde üst üste gelsin */
-}
+        /* Header */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f57c00; /* Turuncu */
+            flex-wrap: wrap; /* Mobilde üst üste gelsin */
+        }
 
-header h1 {
-    font-size: 20px; /* Mobilde biraz küçülsün */
-    margin-bottom: 10px;
-    text-align: center;
-}
+        header h1 {
+            font-size: 20px; /* Mobilde biraz küçülsün */
+            margin-bottom: 10px;
+            text-align: center;
+        }
 
-header nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    background-color: #000;
-    padding: 8px 16px;
-    border-radius: 5px;
-    border: 2px solid #f57c00;
-    transition: 0.3s;
-}
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            background-color: #000;
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: 2px solid #f57c00;
+            transition: 0.3s;
+        }
 
-header nav a:hover {
-    background-color: #f57c00;
-    color: #000;
-}
+        header nav a:hover {
+            background-color: #f57c00;
+            color: #000;
+        }
 
-/* Ana Bölüm */
-main {
-    margin-top: 20px;
-    text-align: center;
-    padding: 10px;
-}
+        /* Ana Bölüm */
+        main {
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+        }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 90%; /* Genişlik mobilde daha az olsun */
-    margin: 0 auto;
-}
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 90%; /* Genişlik mobilde daha az olsun */
+            margin: 0 auto;
+        }
 
-input {
-    padding: 10px;
-    font-size: 14px; /* Mobilde biraz küçülsün */
-    border: 2px solid #f57c00;
-    border-radius: 5px;
-    background-color: #000;
-    color: #fff;
-    outline: none;
-}
+        input {
+            padding: 10px;
+            font-size: 14px; /* Mobilde biraz küçülsün */
+            border: 2px solid #f57c00;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            outline: none;
+        }
 
-button {
-    padding: 10px;
-    font-size: 14px; /* Mobilde küçülsün */
-    border: none;
-    border-radius: 20px;
-    background-color: #f57c00;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
-}
+        button {
+            padding: 10px;
+            font-size: 14px; /* Mobilde küçülsün */
+            border: none;
+            border-radius: 20px;
+            background-color: #f57c00;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-button:hover {
-    background-color: #ff9800;
-}
+        button:hover {
+            background-color: #ff9800;
+        }
 
-#qrImage {
-    margin-top: 10px;
-    max-width: 100%;
-    border: 2px solid #f57c00;
-    border-radius: 10px;
-}
+        #qrImage {
+            margin-top: 10px;
+            max-width: 100%;
+            border: 2px solid #f57c00;
+            border-radius: 10px;
+        }
 
-/* Arka plandaki "MIS" yazısı */
-#background-text {
-    position: absolute;
-    font-size: 120px; /* Mobilde daha küçük */
-    font-weight: bold;
-    color: #ff9800;
-    text-shadow: 0 0 20px #ff9800, 0 0 40px #ff9800, 0 0 60px #ff9800;
-    opacity: 0.2;
-    transition: left 1.75s linear, top 1.75s linear;
-    pointer-events: none; /* Dokunmatiği kapatır */
-}
+        /* Arka plandaki "MIS" yazısı */
+        #background-text {
+            position: absolute;
+            font-size: 120px; /* Mobilde daha küçük */
+            font-weight: bold;
+            color: #ff9800;
+            text-shadow: 0 0 20px #ff9800, 0 0 40px #ff9800, 0 0 60px #ff9800;
+            opacity: 0.2;
+            transition: left 1.75s linear, top 1.75s linear;
+            pointer-events: none; /* Dokunmatiği kapatır */
+        }
 
-/* Mobil Uyumluluk için Medya Sorguları */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column; /* Üst üste gelsin */
-        text-align: center;
-    }
+        /* Mobil Uyumluluk için Medya Sorguları */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column; /* Üst üste gelsin */
+                text-align: center;
+            }
 
-    header h1 {
-        font-size: 18px; /* Başlık küçülsün */
-    }
+            header h1 {
+                font-size: 18px; /* Başlık küçülsün */
+            }
 
-    form {
-        max-width: 95%; /* Daha dar */
-    }
+            form {
+                max-width: 95%; /* Daha dar */
+            }
 
-    #background-text {
-        font-size: 100px; /* Mobilde daha küçük */
-    }
-}
-
-
+            #background-text {
+                font-size: 100px; /* Mobilde daha küçük */
+            }
+        }
     </style>
-
-    
 </head>
 <body>
 
-     <!-- Arka plan için "MIS" yazısı -->
-     <div id="background-text">MIS</div>
+    <!-- Arka plan için "MIS" yazısı -->
+    <div id="background-text">MIS</div>
+
     <!-- Üst başlık ve menü -->
     <header>
         <h1>Istanbul University Attendance System</h1>
@@ -164,76 +161,137 @@ button:hover {
                 <p id="student-name"></p> <!-- Öğrenci ismi -->
                 <img id="qrImage" src="" alt="QR Code" style="display: none;"> <!-- QR kod görseli -->
             </div>
+            <!-- Kullanıcının Konum Bilgisi -->
+            <div id="locationInfo">
+                <p id="latlon"></p> <!-- Enlem ve boylam bilgisi -->
+            </div>
         </section>
     </main>
 
-    <!-- JavaScript dosyasını bağlama -->
+    <!-- JavaScript -->
     <script>
         // Formun submit olayını dinle
-document.getElementById("qrForm").addEventListener("submit", async function (e) {
-    e.preventDefault(); // Sayfanın yeniden yüklenmesini önler
+        document.getElementById("qrForm").addEventListener("submit", async function (e) {
+            e.preventDefault(); // Sayfanın yeniden yüklenmesini önler
 
-    // Formdan gelen verileri al
-    const name = document.getElementById("name").value;
-    const surname = document.getElementById("surname").value;
-    const student_id = document.getElementById("student_id").value;
+            // Formdan gelen verileri al
+            const name = document.getElementById("name").value;
+            const surname = document.getElementById("surname").value;
+            const student_id = document.getElementById("student_id").value;
 
-    try {
-        // Flask API'ye POST isteği gönder
-        const response = await fetch("http://127.0.0.1:5000/generate_qr", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name, surname, student_id })
+            try {
+                // Flask API'ye POST isteği gönder
+                const response = await fetch("http://127.0.0.1:5000/generate_qr", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ name, surname, student_id })
+                });
+
+                // API'den dönen yanıtı işle
+                if (response.ok) {
+                    const data = await response.blob(); // Görsel veri olarak QR kodu al
+                    const qrImage = document.getElementById("qrImage");
+                    const studentName = document.getElementById("student-name");
+
+                    // QR kod ve öğrenci ismini göster
+                    qrImage.src = URL.createObjectURL(data);
+                    qrImage.style.display = "block";
+                    studentName.textContent = `${name} ${surname}`;
+                } else {
+                    alert("QR kod oluşturulamadı. Lütfen tekrar deneyin.");
+                }
+            } catch (error) {
+                console.error("Bir hata oluştu:", error);
+                alert("Sunucuya bağlanılamadı.");
+            }
         });
 
-        // API'den dönen yanıtı işle
-        if (response.ok) {
-            const data = await response.blob(); // Görsel veri olarak QR kodu al
-            const qrImage = document.getElementById("qrImage");
-            const studentName = document.getElementById("student-name");
+        function moveBackgroundText() {
+            const backgroundText = document.getElementById("background-text");
 
-            // QR kod ve öğrenci ismini göster
-            qrImage.src = URL.createObjectURL(data);
-            qrImage.style.display = "block";
-            studentName.textContent = `${name} ${surname}`;
-        } else {
-            alert("QR kod oluşturulamadı. Lütfen tekrar deneyin.");
+            // Ekran boyutlarını al
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            // Yazının boyutunu al
+            const textWidth = backgroundText.offsetWidth;
+            const textHeight = backgroundText.offsetHeight;
+
+            // Rastgele pozisyon oluştur (tam ekran sınırlarını kullanarak)
+            const randomX = Math.random() * (screenWidth - textWidth);
+            const randomY = Math.random() * (screenHeight - textHeight);
+
+            // Yeni pozisyona taşı
+            backgroundText.style.left = `${randomX}px`;
+            backgroundText.style.top = `${randomY}px`;
         }
-    } catch (error) {
-        console.error("Bir hata oluştu:", error);
-        alert("Sunucuya bağlanılamadı.");
-    }
-});
-function moveBackgroundText() {
-    const backgroundText = document.getElementById("background-text");
 
-    // Ekran boyutlarını al
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
+        // Yazıyı her 1 saniyede bir hareket ettir
+        setInterval(moveBackgroundText, 1000);
 
-    // Yazının boyutunu al
-    const textWidth = backgroundText.offsetWidth;
-    const textHeight = backgroundText.offsetHeight;
+        // Okulun koordinatları (enlem, boylam)
+        const schoolCoordinates = {
+            lat: -75.140224,  // İstanbul Üniversitesi'nin enlemi
+            lon: 30.7342592   // İstanbul Üniversitesi'nin boylamı
+        };
 
-    // Rastgele pozisyon oluştur (tam ekran sınırlarını kullanarak)
-    const randomX = Math.random() * (screenWidth - textWidth);
-    const randomY = Math.random() * (screenHeight - textHeight);
+        // Mesafe hesaplamak için Haversine formülü (km cinsinden)
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Dünya'nın yarıçapı (km)
+            const dLat = deg2rad(lat2 - lat1);
+            const dLon = deg2rad(lon2 - lon1);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c; // km cinsinden mesafe
+        }
 
-    // Yeni pozisyona taşı
-    backgroundText.style.left = `${randomX}px`;
-    backgroundText.style.top = `${randomY}px`;
-}
+        // Dereceyi radiana dönüştürme fonksiyonu
+        function deg2rad(deg) {
+            return deg * (Math.PI / 180);
+        }
 
-// Yazıyı her 1 saniyede bir hareket ettir
-setInterval(moveBackgroundText, 1000);
+        // Konum bilgisini al ve ekrana yazdır
+        function locationReceived(position) {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
 
+            // Kullanıcının konum bilgilerini ekrana yazdır
+            const latLonElement = document.getElementById("latlon");
+            latLonElement.innerHTML = `Latitude: ${userLat}, Longitude: ${userLon}`;
 
+            // Kullanıcı ile okul arasındaki mesafeyi hesapla
+            const distance = calculateDistance(schoolCoordinates.lat, schoolCoordinates.lon, userLat, userLon);
 
+            // 500 metreye kadar okula yakınsa, siteyi kullanmaya izin ver
+            if (distance < 0.5) {  // 0.5 km (500 metre)
+                console.log("Okul sınırları içindesiniz.");
+            } else {
+                alert("Okul sınırları dışında. Siteye erişim engelleniyor.");
+                window.location.href = "https://www.google.com";  // Başka bir sayfaya yönlendir
+            }
+        }
 
+        // Konum bilgisi alınamazsa hata mesajı göster
+        function locationError(error) {
+            alert("Konum bilgisi alınamadı. Lütfen konum servislerinizi açın.");
+        }
 
+        // Konum verisi almak için fonksiyon
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(locationReceived, locationError);
+            } else {
+                alert("Geolocation API desteklenmiyor.");
+            }
+        }
 
+        // Sayfa yüklendiğinde konum verisi al
+        window.onload = getLocation;
     </script>
+
 </body>
 </html>
