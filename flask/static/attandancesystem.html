@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Istanbul University Attendance System</title>
+
+    <!-- CSS dosyasını bağlama -->
+     <link rel="stylesheet" href="attandancesystem.css">
+</head>
+<body>
+
+     <!-- Arka plan için "MIS" yazısı -->
+     <div id="background-text">MIS</div>
+    <!-- Üst başlık ve menü -->
+    <header>
+        <h1>Istanbul University Attendance System</h1>
+        <nav>
+            <a href="#" id="teacher-login">Teacher Login</a>
+        </nav>
+    </header>
+
+    
+
+    
+    
+        <!-- Login Form -->
+        <section id="loginSection">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Username" required />
+                <input type="password" id="password" placeholder="Password" required />
+                <button type="submit">Login</button>
+            </form>
+        </section>
+    
+        <!-- QR Form (Başlangıçta gizli) -->
+        <section id="qrSection" style="display: none;">
+            <h2>Generate QR Code</h2>
+            <form id="qrForm">
+                <input type="text" id="name" placeholder="Name" required />
+                <input type="text" id="surname" placeholder="Surname" required />
+                <input type="text" id="student_id" placeholder="Student ID" required />
+                <button type="submit" id="generate-btn">Create</button>
+            </form>
+            <div id="qrResult">
+                <p id="student-name"></p>
+                <img id="qrImage" src="" alt="QR Code" style="display: none;">
+            </div>
+        </section>
+    
+    
+
+    <!-- JavaScript dosyasını bağlama -->
+    <script src="attandancesystem.js"></script>
+</body>
+</html>
